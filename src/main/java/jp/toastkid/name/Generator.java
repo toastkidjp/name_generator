@@ -22,15 +22,15 @@ public class Generator {
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
     /** dir of assets. */
-    private static final String ASSETS_DIR = "assets";
+    private static final String ASSETS_DIR = "user";
 
     /** path/to/firstname/file. */
     private static final String FIRST_NAME_FILE
-        = ASSETS_DIR + "/resources/NameMaker/first.txt";
+        = ASSETS_DIR + "/res/NameMaker/first.txt";
 
     /** path/to/familyname/file. */
     private static final String FAMILY_NAME_FILE
-        = ASSETS_DIR + "/resources/NameMaker/family.txt";
+        = ASSETS_DIR + "/res/NameMaker/family.txt";
 
     /** file から読み込んだ国籍を格納する. */
     private volatile MutableList<String> nationalities;

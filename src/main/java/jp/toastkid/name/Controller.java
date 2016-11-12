@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Pane;
@@ -74,7 +73,7 @@ public class Controller implements Initializable {
      * Get root pane.
      * @return root pane
      */
-    protected Parent getRoot() {
+    protected Pane getRoot() {
         return root;
     }
 
