@@ -38,7 +38,7 @@ public class NameInformationTest {
      */
     @Test
     public void testHashCode() {
-        assertEquals(new NameInformation().hashCode(), NameInformation.empty().hashCode());
+        assertEquals(new NameInformation.Builder().build().hashCode(), NameInformation.empty().hashCode());
     }
 
     /**
@@ -47,6 +47,6 @@ public class NameInformationTest {
     @Test
     public void testEquals() {
         assertEquals(NameInformation.empty(), NameInformation.empty());
-        assertEquals(new NameInformation(), NameInformation.empty());
+        assertEquals(new NameInformation.Builder().build(), NameInformation.empty());
     }
 }

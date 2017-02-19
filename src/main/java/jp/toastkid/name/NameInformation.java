@@ -1,7 +1,12 @@
 package jp.toastkid.name;
 
+import java.util.Optional;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+
+import com.eclipsesource.json.Json;
+import com.eclipsesource.json.JsonObject;
 
 /**
  * Name information.
@@ -14,16 +19,16 @@ public final class NameInformation implements Comparable<NameInformation> {
     private static final NameInformation PRESENT = new NameInformation.Builder().build();
 
     /** name. */
-    private String name;
+    private final String name;
 
     /** name's spelling. */
-    private String spelling;
+    private final String spelling;
 
     /** name's gender. */
-    private String seibetsu;
+    private final String seibetsu;
 
     /** name's nationality. */
-    private String nationality;
+    private final String nationality;
 
     /**
      * Builder.
@@ -75,13 +80,6 @@ public final class NameInformation implements Comparable<NameInformation> {
         public NameInformation build() {
             return new NameInformation(this);
         }
-    }
-
-    /**
-     * for use Jackson.
-     */
-    public NameInformation() {
-        // NOP.
     }
 
     /**
@@ -153,7 +151,27 @@ public final class NameInformation implements Comparable<NameInformation> {
          return this.nationality;
     }
 
+    /**
+     * Return empty object.
+     * @return
+     */
     public static NameInformation empty() {
         return PRESENT;
+    }
+
+    /**
+     * Make object from JSON string.
+     * @param str JSON string
+     * @return {@link NameInformation} object
+     */
+    public static NameInformation fromJson(final String str) {
+        final JsonObject json = Json.parse(str).asObject();
+        final Builder builder = new NameInformation.Builder();
+        builder.setName(json.getString("name", ""))
+               .setSpelling(json.getString("spelling", ""))
+               .setNationality(json.getString("nationality", ""));
+        Optional.ofNullable(json.get("seibetsu"))
+                .ifPresent(j -> builder.setSeibetsu(j.asString()));
+        return builder.build();
     }
 }

@@ -12,9 +12,6 @@ import org.eclipse.collections.impl.factory.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectReader;
-
 import reactor.core.publisher.Flux;
 
 /**
@@ -26,10 +23,6 @@ public class NameLoader implements Callable<Collection<NameInformation>>{
 
     /** Logger. */
     private static final Logger LOGGER = LoggerFactory.getLogger(NameLoader.class);
-
-    /** ObjectReader's holder. */
-    private static final ThreadLocal<ObjectReader> READER
-        = ThreadLocal.withInitial(() -> new ObjectMapper().readerFor(NameInformation.class));
 
     /** Name list. */
     private final Collection<NameInformation> names;
@@ -56,7 +49,7 @@ public class NameLoader implements Callable<Collection<NameInformation>>{
             final Flux<NameInformation> cache
                 = Flux.<NameInformation>create(emitter -> fileReader.forEach(str -> {
                     try {
-                        emitter.next(READER.get().readValue(str.getBytes("UTF-8")));
+                        emitter.next(NameInformation.fromJson(str));
                     } catch (final Exception e) {
                         emitter.error(e);
                     }
