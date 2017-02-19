@@ -19,15 +19,13 @@ import org.junit.Test;
 public class NameLoaderTest {
 
     /** dir of assets. */
-    private static final String ASSETS_DIR = "assets";
+    private static final String ASSETS_DIR       = "user/res/NameMaker/";
 
     /** path/to/firstname/file. */
-    private static final String FIRST_NAME_FILE
-        = ASSETS_DIR + "/resources/NameMaker/first.txt";
+    private static final String FIRST_NAME_FILE  = ASSETS_DIR + "first.txt";
 
     /** path/to/familyname/file. */
-    private static final String FAMILY_NAME_FILE
-        = ASSETS_DIR + "/resources/NameMaker/family.txt";
+    private static final String FAMILY_NAME_FILE = ASSETS_DIR + "family.txt";
 
     /** file から読み込んだ国籍を格納する. */
     private volatile MutableList<String> nationalities;
